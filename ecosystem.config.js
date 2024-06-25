@@ -4,7 +4,7 @@ require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 module.exports = {
   apps: [
     {
-      name: "Chatbot Hani",
+      name: "WaBlast Customer Service",
       script: "./app.js",
       // Restart the app every 5 hours (18000 seconds)
       restart_delay: 18000000,

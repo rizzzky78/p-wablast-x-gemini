@@ -30,8 +30,5 @@ const functionCallMapper = {
   },
 };
 
-function functionApiResponseMapper(apiresponse) {
-  
-}
 
 module.exports = { functionDeclarationTool, functionCallMapper };

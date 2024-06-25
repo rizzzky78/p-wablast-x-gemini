@@ -8,6 +8,7 @@ interface CommandObject {
   prefix: string;
   args: string[];
   fullArgs: string;
+  msgBody?: string
   msg: Serialize;
 }
 

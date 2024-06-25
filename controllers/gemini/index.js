@@ -112,12 +112,12 @@ class Gemini {
     const model = gemini.getGenerativeModel({
       model: selectedModel,
       systemInstruction: Persona.getPersona(),
-      tools: functionDeclarationTool,
-      toolConfig: {
-        functionCallingConfig: {
-          mode: "AUTO",
-        },
-      },
+      // tools: functionDeclarationTool,
+      // toolConfig: {
+      //   functionCallingConfig: {
+      //     mode: "AUTO",
+      //   },
+      // },
     });
 
     const existingUser = await this.readUserData(id);
@@ -163,40 +163,47 @@ class Gemini {
 
     logger.info(chalk.magentaBright(`User ${id} uses autochat`));
 
-    const funcCall = result.response.functionCalls();
+    // const funcCall = result.response.functionCalls();
 
-    if (funcCall) {
-      const [call] = funcCall;
-      const apiresponse = await functionCallMapper[call.name](call.args);
+    // if (funcCall) {
+    //   const [call] = funcCall;
+    //   const apiresponse = await functionCallMapper[call.name](call.args);
 
-      const fromFunctionsCall = await chat.sendMessage([
-        {
-          functionResponse: {
-            name: call.name,
-            response: apiresponse,
-          },
-        },
-      ]);
+    //   const fromFunctionsCall = await chat.sendMessage([
+    //     {
+    //       functionResponse: {
+    //         name: call.name,
+    //         response: apiresponse,
+    //       },
+    //     },
+    //   ]);
 
-      // const modresult = await chat.sendMessage(
-      //   fun(apiresponse)
-      // );
+    //   // const modresult = await chat.sendMessage(
+    //   //   fun(apiresponse)
+    //   // );
 
-      const modcontent = await chat.getHistory();
+    //   const modcontent = await chat.getHistory();
 
-      existingUser
-        ? await this.updateUserData({ id, content: modcontent })
-        : await this.createUser({ id, tagname, content: modcontent });
+    //   existingUser
+    //     ? await this.updateUserData({ id, content: modcontent })
+    //     : await this.createUser({ id, tagname, content: modcontent });
 
-      return fromFunctionsCall.response.text();
-    } else {
-      const content = await chat.getHistory();
-      existingUser
-        ? await this.updateUserData({ id, content })
-        : await this.createUser({ id, tagname, content });
+    //   return fromFunctionsCall.response.text();
+    // } else {
+    //   const content = await chat.getHistory();
+    //   existingUser
+    //     ? await this.updateUserData({ id, content })
+    //     : await this.createUser({ id, tagname, content });
 
-      return result.response.text();
-    }
+    //   return result.response.text();
+    // }
+
+    const content = await chat.getHistory();
+    existingUser
+      ? await this.updateUserData({ id, content })
+      : await this.createUser({ id, tagname, content });
+
+    return result.response.text();
   }
 
   /**

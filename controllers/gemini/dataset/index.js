@@ -1,4 +1,24 @@
-const { readFileSync } = require("fs");
+const { readFileSync, writeFileSync } = require("fs");
+const { quickMessage } = require("../msg-info");
+
+const staticData = readFileSync(
+  "./controllers/gemini/dataset/general.information.txt",
+  "utf-8"
+);
+
+/**
+ *
+ * @param { string } username
+ * @param { string } dataset
+ */
+function formatInjectableData(username, dataset = null) {
+  const data =
+    `My Username is: ${username}\n\n` +
+    `${staticData}\n\n` +
+    `${dataset ? dataset : ""}\n\n` +
+    `Wait until next instructions.`;
+  return data;
+}
 
 class Dataset {
   /**
@@ -12,9 +32,7 @@ class Dataset {
         role: "user",
         parts: [
           {
-            text:
-              `My Username is: ${username}\n\n` +
-              readFileSync("./assets/data/general-information.txt", "utf-8"),
+            text: formatInjectableData(username),
           },
         ],
       },
@@ -53,6 +71,22 @@ class Dataset {
         ],
       },
     ];
+  }
+
+  static async getCurrentDataset() {
+    return staticData ? staticData : quickMessage("dataset_empty");
+  }
+
+  /**
+   *
+   * @param { string } dataset
+   */
+  static async updateDataset(dataset) {
+    writeFileSync(
+      "./controllers/gemini/dataset/general.information.txt",
+      dataset.trim()
+    );
+    return dataset.trim()
   }
 }
 

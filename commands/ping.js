@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 /**
  * @type { import('@libs/builders/command').ICommand }
  */

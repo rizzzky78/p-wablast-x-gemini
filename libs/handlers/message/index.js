@@ -7,6 +7,7 @@ const moment = require("moment-timezone");
 const chalk = require("chalk");
 const logger = require("@libs/utils/logger");
 const { Gemini } = require("@controllers/gemini");
+const { formatMessage, quickMessage } = require("@controllers/gemini/msg-info");
 
 /**
  * **Core Message Handler**
@@ -47,6 +48,7 @@ async function MessageHandler(client, { messages, type }) {
   const args = msg.body?.trim()?.split(/ +/)?.slice(1);
   const fullArgs = msg.body?.replace(command, "")?.slice(1).trim() || null;
   const messageArgs = msg.body || null;
+  const msgBody = messageArgs;
 
   const getCommand =
     commands.get(command) ||
@@ -72,13 +74,13 @@ async function MessageHandler(client, { messages, type }) {
       })
         .then((geminiResponse) => {
           return client.sendMessage(msg.from, {
-            text: geminiResponse,
+            text: formatMessage(geminiResponse),
           });
         })
         .catch((e) => {
           console.error(e);
           logger.error(e);
-          return msg.reply("AN ERROR OCCURED!");
+          return msg.reply(quickMessage("error_occured"));
         });
     });
   }
@@ -129,18 +131,25 @@ async function MessageHandler(client, { messages, type }) {
       if (typeof getCommand.waitMessage === "string") {
         await msg.reply(getCommand.waitMessage);
       } else {
-        await msg.reply("_Mohon tunggu sebentar..._");
+        await msg.reply("_Please wait..._");
       }
     }
 
-    return await getCommand.callback({
-      client,
-      message,
-      msg,
-      command,
-      args,
-      fullArgs,
-    });
+    return await getCommand
+      .callback({
+        client,
+        message,
+        msg,
+        msgBody,
+        command,
+        args,
+        fullArgs,
+      })
+      .catch((e) => {
+        console.error(e);
+        logger.error(e);
+        return msg.reply(quickMessage("error_occured"));
+      });
   }
 }
 module.exports = MessageHandler;
