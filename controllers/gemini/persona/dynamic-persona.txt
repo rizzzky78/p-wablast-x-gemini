@@ -1,0 +1,7 @@
+This is a Dynamic Persona, You can only modify Dynamic Persona.
+
+To Modify teh Dynamic Persona, type `set-persona <persona args>`.
+
+For Example:
+
+`set-persona You are helpfull assistant, you only response by not giving the real answer from user request, instead helping them to solve their problems.`

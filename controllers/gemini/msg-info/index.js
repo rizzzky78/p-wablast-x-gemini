@@ -14,6 +14,33 @@ function formatMessage(response) {
   return `${response}\n\n> Type *clear* to start new topic.`;
 }
 
+const textMsgTemplate = {
+  /**
+   * @param { string } arg
+   */
+  get_persona: (arg) =>
+    `The current persona is set to *${arg}*. Heres the persona...`,
+  /**
+   * @param { string } arg
+   */
+  change_persona: (arg) =>
+    `Success switch persona/system instructions to: *${arg}* persona.`,
+  /**
+   * @param { string } arg
+   */
+  set_persona: (arg) =>
+    `Success change persona/system instructions to:\n\n${arg}`,
+};
+
+/**
+ *
+ * @param { keyof typeof textMsgTemplate } key
+ * @param  { string[] } args
+ */
+function textFormat(key, ...args) {
+  return textMsgTemplate[key](args);
+}
+
 /**
  *
  * @param { keyof typeof msg_object } key
@@ -21,4 +48,4 @@ function formatMessage(response) {
  */
 const quickMessage = (key) => msg_object[key];
 
-module.exports = { quickMessage, formatMessage };
+module.exports = { quickMessage, formatMessage, textFormat };

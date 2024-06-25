@@ -52,7 +52,7 @@ process.on("unhandledRejection", (err) => {
  *
  *
  * Rizky
- * Copyright @2024
+ * Copyright @June2024
  *
  *
  */

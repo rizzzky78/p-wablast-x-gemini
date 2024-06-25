@@ -1,4 +1,4 @@
-const { quickMessage } = require("@controllers/gemini/msg-info");
+const { quickMessage, textFormat } = require("@controllers/gemini/msg-info");
 const { Persona } = require("@controllers/gemini/persona");
 
 /**
@@ -12,9 +12,7 @@ module.exports = {
     } else {
       msg.react("👍🏻").then(async () => {
         const result = await Persona.setPersona(fullArgs.trim());
-        return msg.reply(
-          `Success change persona/system instructions to:\n\n${result}`
-        );
+        return msg.reply(textFormat("set_persona", result));
       });
     }
   },

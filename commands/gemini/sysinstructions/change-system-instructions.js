@@ -1,3 +1,4 @@
+const { textFormat } = require("@controllers/gemini/msg-info");
 const { Persona } = require("@controllers/gemini/persona");
 
 /**
@@ -8,9 +9,7 @@ module.exports = {
   callback: async ({ msg }) => {
     msg.react("👍🏻").then(async () => {
       const result = await Persona.switchPersona();
-      return msg.reply(
-        `Success switch persona/system instructions to: *${result}* persona.`
-      );
+      return msg.reply(textFormat("change_persona", result));
     });
   },
 };

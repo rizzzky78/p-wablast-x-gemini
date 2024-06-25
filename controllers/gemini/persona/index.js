@@ -26,7 +26,7 @@ class Persona {
   }
 
   /**
-   * 
+   *
    * @returns { "origin" | "mod" }
    */
   static async switchPersona() {
@@ -38,7 +38,11 @@ class Persona {
     );
     writeFileSync(
       "./controllers/gemini/persona/switcher.json",
-      JSON.stringify({ persona: state.persona === "origin" ? `mod` : `origin` })
+      JSON.stringify(
+        { persona: state.persona === "origin" ? `mod` : `origin` },
+        null,
+        2
+      )
     );
     return state.persona === "origin" ? "mod" : "origin";
   }

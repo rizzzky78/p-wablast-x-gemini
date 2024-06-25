@@ -66,9 +66,7 @@ async function connect() {
     const { lastDisconnect, connection, qr } = up;
 
     if (qr) {
-      logger.info(
-        "Please scanning QR Code to connect\nCara menghubungkan akun whatsapp ke Chatbot sama halnya seperti saat pertama kali menggunakan whatsapp web."
-      );
+      logger.info("Please scan the QR Code to connect");
     }
 
     if (connection) {

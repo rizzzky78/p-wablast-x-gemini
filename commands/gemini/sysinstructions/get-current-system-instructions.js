@@ -1,3 +1,4 @@
+const { textFormat } = require("@controllers/gemini/msg-info");
 const { Persona } = require("@controllers/gemini/persona");
 
 /**
@@ -8,15 +9,11 @@ module.exports = {
   callback: async ({ msg, client }) => {
     msg.react("👍🏻").then(async () => {
       const { current, persona } = await Persona.getPersona();
-      return msg
-        .reply(
-          `The current persona is set to *${current}*. Heres the persona...`
-        )
-        .then(() => {
-          return client.sendMessage(msg.from, {
-            text: persona.trim(),
-          });
+      return msg.reply(textFormat("get_persona", current)).then(() => {
+        return client.sendMessage(msg.from, {
+          text: persona.trim(),
         });
+      });
     });
   },
 };
