@@ -69,9 +69,9 @@ async function MessageHandler(client, { messages, type }) {
        * @returns { { img: Buffer | null; vid: Buffer | null } }
        */
       function mapMediaMessage(mimeMsg, mimeMedia) {
-        if (mimeMsg.typeCheck.isImage || mimeMsg.typeCheck.isQuotedImage) {
+        if (mimeMsg.typeCheck.isImage) {
           return { img: mimeMedia, vid: null };
-        } else if (mimeMsg.typeCheck.isVideo || mimeMsg.typeCheck.isQuotedVideo) {
+        } else if (mimeMsg.typeCheck.isVideo) {
           return { vid: mimeMedia, img: null };
         }
       }

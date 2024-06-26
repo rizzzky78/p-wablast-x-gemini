@@ -132,7 +132,7 @@ class Gemini {
       sessionChat.push(...Dataset.injectInitialData(tagname));
     }
 
-    if (inlineData.img || inlineData.img !== null) {
+    if (inlineData.img) {
       const visionImage = await model.generateContent([
         prompt,
         {
@@ -155,7 +155,7 @@ class Gemini {
     if (inlineData.doc) {
     }
 
-    if (inlineData.vid || inlineData.vid !== null) {
+    if (inlineData.vid) {
       const visionVideo = await model.generateContent([
         prompt,
         {
