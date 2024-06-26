@@ -14,6 +14,7 @@ const {
   functionDeclarationTool,
   functionCallMapper,
 } = require("./api/functioncall");
+const { FileState } = require("@google/generative-ai/dist/files/files");
 
 /**
  * **Google Gemini AI**
@@ -169,7 +170,15 @@ class Gemini {
       const resultVid = await GoogleCloudAIFile.uploadFile(inlineData.vid);
       msg.reply("This maybe take a few moment...");
 
-      await new Promise((resolve) => setTimeout(resolve, 5500));
+      while (resultVid.file.state === FileState.PROCESSING) {
+        process.stdout.write(".");
+        // Sleep for 10 seconds
+        await new Promise((resolve) => setTimeout(resolve, 10_000));
+      }
+
+      if (resultVid.file.state === FileState.FAILED) {
+        return msg.reply("Cannot process the attached Video!");
+      }
 
       const visionVideoResponse = await model.generateContent([
         {
