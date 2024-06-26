@@ -14,7 +14,7 @@ const {
   functionDeclarationTool,
   functionCallMapper,
 } = require("./api/functioncall");
-const { FileState } = require("@google/generative-ai/dist/files/files");
+const { FileState } = require("@google/generative-ai/files");
 
 /**
  * **Google Gemini AI**
