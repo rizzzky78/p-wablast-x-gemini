@@ -100,9 +100,10 @@ class Gemini {
 
   /**
    * **Google Gemini Chat Completions**
+   * @param { import("@libs/utils/serialize").Serialize } msg
    * @param { import("./gemini").GenerativeChatDto } dto
    */
-  static async generative({ user, inlineData }) {
+  static async generative(msg, { user, inlineData }) {
     const { id, tagname, prompt } = user;
     const gemini = new GoogleGenerativeAI(process.env.GEMINI_APIKEY);
 
@@ -136,8 +137,9 @@ class Gemini {
 
     if (inlineData.img) {
       const resultImg = await GoogleCloudAIFile.uploadFile(inlineData.img);
+      msg.reply("Analyzing, this maybe take a few moment...");
 
-      await new Promise((resolve) => setTimeout(resolve, 2500));
+      await new Promise((resolve) => setTimeout(resolve, 3500));
 
       const visionImage = await model.generateContent([
         {
@@ -165,8 +167,9 @@ class Gemini {
 
     if (inlineData.vid) {
       const resultVid = await GoogleCloudAIFile.uploadFile(inlineData.vid);
+      msg.reply("This maybe take a few moment...");
 
-      await new Promise((resolve) => setTimeout(resolve, 2500));
+      await new Promise((resolve) => setTimeout(resolve, 5500));
 
       const visionVideoResponse = await model.generateContent([
         {

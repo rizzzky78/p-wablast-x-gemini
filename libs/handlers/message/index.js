@@ -73,7 +73,7 @@ async function MessageHandler(client, { messages, type }) {
 
         console.log(JSON.stringify({ ext, mime }, null, 2));
 
-        await Gemini.generative({
+        await Gemini.generative(msg, {
           user: {
             id: msg.senderNumber,
             tagname: msg.pushName,
