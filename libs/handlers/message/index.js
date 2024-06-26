@@ -66,6 +66,8 @@ async function MessageHandler(client, { messages, type }) {
 
       const { ext, mime } = await Tool.getMimeTypeFromBuffer(mediaMessage);
 
+      console.log(JSON.stringify({ ext, mime }, null, 2));
+
       await Gemini.generative({
         user: {
           id: msg.senderNumber,
@@ -73,8 +75,8 @@ async function MessageHandler(client, { messages, type }) {
           prompt: messageArgs,
         },
         inlineData: {
-          img: mime === "image/png" ? mediaMessage : undefined,
-          vid: mime === "video/mp4" ? mediaMessage : undefined,
+          img: mime === "image/png" ? mediaMessage : null,
+          vid: mime === "video/mp4" ? mediaMessage : null,
         },
       })
         .then((geminiResponse) => {
