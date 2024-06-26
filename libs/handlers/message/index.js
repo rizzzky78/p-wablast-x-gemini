@@ -71,8 +71,6 @@ async function MessageHandler(client, { messages, type }) {
 
         const { ext, mime } = await Tool.getMimeTypeFromBuffer(mediaMessage);
 
-        console.log(JSON.stringify({ ext, mime }, null, 2));
-
         await Gemini.generative(msg, {
           user: {
             id: msg.senderNumber,

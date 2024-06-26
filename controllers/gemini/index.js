@@ -170,10 +170,13 @@ class Gemini {
       const resultVid = await GoogleCloudAIFile.uploadFile(inlineData.vid);
       msg.reply("This maybe take a few moment...");
 
-      while (resultVid.file.state === FileState.PROCESSING) {
+      let fileVideo = await GoogleCloudAIFile.getFile(resultVid.file.name);
+      while (fileVideo.state === FileState.PROCESSING) {
         process.stdout.write(".");
         // Sleep for 10 seconds
         await new Promise((resolve) => setTimeout(resolve, 10_000));
+        msg.reply("Processing..");
+        fileVideo = await GoogleCloudAIFile.getFile(resultVid.file.name);
       }
 
       if (resultVid.file.state === FileState.FAILED) {
