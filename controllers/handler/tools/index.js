@@ -1,3 +1,5 @@
+const fileType = require("file-type");
+
 class Tool {
   /**
    *
@@ -19,6 +21,15 @@ class Tool {
     };
     const data = d ? d : [""];
     return data.map(mod[c]);
+  }
+
+  /**
+   *
+   * @param { Buffer } buffer
+   * @returns { Promise<{ ext: import("file-type/core").FileExtension; mime: import("file-type/core").MimeType }> }
+   */
+  static async getMimeTypeFromBuffer(buffer) {
+    return await fileType.fromBuffer(buffer);
   }
 }
 

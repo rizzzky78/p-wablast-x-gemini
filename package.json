@@ -23,6 +23,7 @@
     "crypto-random-string": "^2.0.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.0.1",
+    "file-type": "^16.5.4",
     "form-data": "^4.0.0",
     "glob": "^8.0.3",
     "jspdf": "^2.5.1",

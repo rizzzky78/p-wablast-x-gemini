@@ -8,6 +8,7 @@ const chalk = require("chalk");
 const logger = require("@libs/utils/logger");
 const { Gemini } = require("@controllers/gemini");
 const { formatMessage, quickMessage } = require("@controllers/gemini/msg-info");
+const { Tool } = require("@controllers/handler/tools");
 
 /**
  * **Core Message Handler**
@@ -62,26 +63,19 @@ async function MessageHandler(client, { messages, type }) {
         (await msg.download("buffer")) ||
         (msg.quoted && (await msg.quoted.download("buffer"))) ||
         null;
-      /**
-       *
-       * @param { import("@libs/utils/serialize").Serialize } mimeMsg
-       * @param { Buffer } mimeMedia
-       * @returns { { img: Buffer | null; vid: Buffer | null } }
-       */
-      function mapMediaMessage(mimeMsg, mimeMedia) {
-        if (mimeMsg.typeCheck.isImage) {
-          return { img: mimeMedia, vid: null };
-        } else if (mimeMsg.typeCheck.isVideo) {
-          return { vid: mimeMedia, img: null };
-        }
-      }
+
+      const { ext, mime } = await Tool.getMimeTypeFromBuffer(mediaMessage);
+
       await Gemini.generative({
         user: {
           id: msg.senderNumber,
           tagname: msg.pushName,
           prompt: messageArgs,
         },
-        inlineData: mapMediaMessage(msg, mediaMessage),
+        inlineData: {
+          img: mime === "image/png" ? mediaMessage : null,
+          vid: mime === "video/mp4" ? mediaMessage : null,
+        },
       })
         .then((geminiResponse) => {
           return client.sendMessage(msg.from, {
