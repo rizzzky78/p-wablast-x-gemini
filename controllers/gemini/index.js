@@ -10,10 +10,6 @@ const { Persona } = require("./persona");
 const logger = require("@libs/utils/logger");
 const { GoogleCloudAIFile } = require("./api/google");
 
-const {
-  functionDeclarationTool,
-  functionCallMapper,
-} = require("./api/functioncall");
 const { FileState } = require("@google/generative-ai/files");
 
 /**
@@ -211,41 +207,6 @@ class Gemini {
     const result = await chat.sendMessage(prompt);
 
     logger.info(chalk.magentaBright(`User ${id} uses autochat`));
-
-    // const funcCall = result.response.functionCalls();
-
-    // if (funcCall) {
-    //   const [call] = funcCall;
-    //   const apiresponse = await functionCallMapper[call.name](call.args);
-
-    //   const fromFunctionsCall = await chat.sendMessage([
-    //     {
-    //       functionResponse: {
-    //         name: call.name,
-    //         response: apiresponse,
-    //       },
-    //     },
-    //   ]);
-
-    //   // const modresult = await chat.sendMessage(
-    //   //   fun(apiresponse)
-    //   // );
-
-    //   const modcontent = await chat.getHistory();
-
-    //   existingUser
-    //     ? await this.updateUserData({ id, content: modcontent })
-    //     : await this.createUser({ id, tagname, content: modcontent });
-
-    //   return fromFunctionsCall.response.text();
-    // } else {
-    //   const content = await chat.getHistory();
-    //   existingUser
-    //     ? await this.updateUserData({ id, content })
-    //     : await this.createUser({ id, tagname, content });
-
-    //   return result.response.text();
-    // }
 
     const content = await chat.getHistory();
     existingUser
