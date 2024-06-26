@@ -73,8 +73,8 @@ async function MessageHandler(client, { messages, type }) {
           prompt: messageArgs,
         },
         inlineData: {
-          img: mime === "image/png" ? mediaMessage : null,
-          vid: mime === "video/mp4" ? mediaMessage : null,
+          img: mime === "image/png" ? mediaMessage : undefined,
+          vid: mime === "video/mp4" ? mediaMessage : undefined,
         },
       })
         .then((geminiResponse) => {
