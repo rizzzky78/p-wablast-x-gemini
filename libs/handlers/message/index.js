@@ -9,6 +9,7 @@ const logger = require("@libs/utils/logger");
 const { Gemini } = require("@controllers/gemini");
 const { formatMessage, quickMessage } = require("@controllers/gemini/msg-info");
 const { Tool } = require("@controllers/handler/tools");
+const { writeFile } = require("fs").promises;
 
 /**
  * **Core Message Handler**
@@ -58,38 +59,43 @@ async function MessageHandler(client, { messages, type }) {
   if (!getCommand) {
     if (msg.isGroup) return;
     if (msg.isSelf) return;
-    msg.react("👍🏻").then(async () => {
-      const mediaMessage =
-        (await msg.download("buffer")) ||
-        (msg.quoted && (await msg.quoted.download("buffer"))) ||
-        null;
 
-      const { ext, mime } = await Tool.getMimeTypeFromBuffer(mediaMessage);
+    const autoResponseState = true;
 
-      console.log(JSON.stringify({ ext, mime }, null, 2));
+    if (autoResponseState) {
+      msg.react("👍🏻").then(async () => {
+        const mediaMessage =
+          (await msg.download("buffer")) ||
+          (msg.quoted && (await msg.quoted.download("buffer"))) ||
+          null;
 
-      await Gemini.generative({
-        user: {
-          id: msg.senderNumber,
-          tagname: msg.pushName,
-          prompt: messageArgs,
-        },
-        inlineData: {
-          img: mime === "image/jpeg" ? mediaMessage : null,
-          vid: mime === "video/mp4" ? mediaMessage : null,
-        },
-      })
-        .then((geminiResponse) => {
-          return client.sendMessage(msg.from, {
-            text: formatMessage(geminiResponse),
-          });
+        const { ext, mime } = await Tool.getMimeTypeFromBuffer(mediaMessage);
+
+        console.log(JSON.stringify({ ext, mime }, null, 2));
+
+        await Gemini.generative({
+          user: {
+            id: msg.senderNumber,
+            tagname: msg.pushName,
+            prompt: messageArgs,
+          },
+          inlineData: {
+            img: mime === "image/jpeg" ? mediaMessage : null,
+            vid: mime === "video/mp4" ? mediaMessage : null,
+          },
         })
-        .catch((e) => {
-          console.error(e);
-          logger.error(e);
-          return msg.reply(quickMessage("error_occured"));
-        });
-    });
+          .then((geminiResponse) => {
+            return client.sendMessage(msg.from, {
+              text: formatMessage(geminiResponse),
+            });
+          })
+          .catch((e) => {
+            console.error(e);
+            logger.error(e);
+            return msg.reply(quickMessage("error_occured"));
+          });
+      });
+    }
   }
 
   if (getCommand) {

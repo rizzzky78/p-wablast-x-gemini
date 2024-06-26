@@ -1,0 +1,55 @@
+{
+  "messages": [
+    {
+      "key": {
+        "remoteJid": "6281329585825@s.whatsapp.net",
+        "fromMe": false,
+        "id": "65D45661BEE4A81B58ACAE58D06DA35B"
+      },
+      "messageTimestamp": 1719403139,
+      "pushName": "Rizky.",
+      "message": {
+        "messageContextInfo": {
+          "deviceListMetadata": {
+            "senderKeyHash": "bcybOsrQdVhy/Q==",
+            "senderTimestamp": "1719220243",
+            "recipientKeyHash": "4CoV9Y8EMFsS/w==",
+            "recipientTimestamp": "1719336111"
+          },
+          "deviceListMetadataVersion": 2
+        },
+        "documentWithCaptionMessage": {
+          "message": {
+            "documentMessage": {
+              "url": "https://mmg.whatsapp.net/v/t62.7119-24/11970275_3460419040770434_7979241063605878462_n.enc?ccb=11-4&oh=01_Q5AaIImq02DfoFWNaaMMimcXUfUo-cb7wh8KOojqJKqg6QvF&oe=66A37293&_nc_sid=5e03e0&mms3=true",
+              "mimetype": "application/pdf",
+              "fileSha256": "QGR3NjvJ7ci4I+zdt6s7y7quxtiBLS368VlxsA8PmWM=",
+              "fileLength": "1040420",
+              "pageCount": 11,
+              "mediaKey": "PCodtOK/tuP7LlYZB1hMjo+usdLLILid2yJchNJUDFQ=",
+              "fileName": "FULL Jurnal Hawari Al Robbani.pdf",
+              "fileEncSha256": "szZinLbQizRttiw+4BljmQj0mn0Z7myDxRKb7jUs1WM=",
+              "directPath": "/v/t62.7119-24/11970275_3460419040770434_7979241063605878462_n.enc?ccb=11-4&oh=01_Q5AaIImq02DfoFWNaaMMimcXUfUo-cb7wh8KOojqJKqg6QvF&oe=66A37293&_nc_sid=5e03e0",
+              "mediaKeyTimestamp": "1719403136",
+              "thumbnailDirectPath": "/v/t62.36145-24/13155694_413113421731720_136247236673837993_n.enc?ccb=11-4&oh=01_Q5AaII852fs_zAUc5mf_jCgMEa-Fsk2ZdJt3NskohQJbvjfr&oe=66A37C9A&_nc_sid=5e03e0",
+              "thumbnailSha256": "eHiOQWxoFbLOv3bX016BA2lqzl0bhbGOHNi748fFYcE=",
+              "thumbnailEncSha256": "xW7wajecWO+QsjFdCuHPbe4ODBb9tbLR0Gsf6TV3QgQ=",
+              "jpegThumbnail": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABERERESERMVFRMaHBkcGiYjICAjJjoqLSotKjpYN0A3N0A3WE5fTUhNX06MbmJiboyiiIGIosWwsMX46/j///8BERERERIRExUVExocGRwaJiMgICMmOiotKi0qOlg3QDc3QDdYTl9NSE1fToxuYmJujKKIgYiixbCwxfjr+P/////CABEIAGAARAMBIgACEQEDEQH/xAAwAAEAAwEBAQAAAAAAAAAAAAAAAQMEAgUGAQEBAQEBAAAAAAAAAAAAAAAAAQIDBP/aAAwDAQACEAMQAAAA+8AU5D0Xm2G5EhAmi+op0UVy7mTRHY1AGPZ5srvPVy16kedrjVbj2dMhuK7EYe7uPPvPoo2Fd9dnXIdI475MmlZm1U6+csW+uzrAhx2BBKBKBKB//8QAMBAAAgIBAgEKBAcAAAAAAAAAAQIDEQASITEEEBMgIkFRYXGRJDAykjNCcoGhseH/2gAIAQEAAT8A+W0jNYDsAe7RhD3sZK/fLl32f+ciMgN6nFeRORS3YLE+q11I21OwaYDegLzVIXKrJgilF65D5VirX5ietcGvhJx88YIWJ1vvmxNLIxPtgidDbMWHqcVYmG2r3OdCnn7nAK53Khm1rEPMrhl1bgxVW1och3UKrRfacHTb26/bmjlGokMgvyORSzr2SUDemJrrtEH0Fc87apBdVdEXj/TXp3/5jRKRXgON5CBB9FH1OLylxRCL748jlFI6K/1Ymuu0APQ88/JUo0SWu8aNWGwOxwgKlhLBxCdX4f8AWUtVpHHKDuKQAA2erGBTJ4HJtQUgLqxekVtol98VRxxNyzdSVWBvSfesp9YIVgRxN2MqYi7XBHKm4I38cmDqNTE+HZvI5oBWl9hVAsb6j8nmYmnAHdiwyRsNTg878nlZjUgAwcmcaiz8cAoc/wASpIXhgvvFdexlj5H/xAAjEQEAAgECBQUAAAAAAAAAAAABAhEAECEDEiAxUSJBYXGx/9oACAECAQE/AOpkR74TFrcfDrJox2l3Vw9VWO3zkbtit1oliZUk5mXf9yEE2vOHdKtq6sIrZZ9OHCibXKvF5t7HX//EAB0RAAIBBAMAAAAAAAAAAAAAAAABEBEgITESUWH/2gAIAQMBAT8AuSKShZRofc1Whscps5Pwzf8A/9k=",
+              "contextInfo": {
+                "expiration": 0,
+                "ephemeralSettingTimestamp": "1717057959",
+                "disappearingMode": {
+                  "initiator": "CHANGED_IN_CHAT"
+                }
+              },
+              "thumbnailHeight": 480,
+              "thumbnailWidth": 339,
+              "caption": "Dataset"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "type": "notify"
+}

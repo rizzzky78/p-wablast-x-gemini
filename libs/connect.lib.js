@@ -133,6 +133,11 @@ async function connect() {
   // messages.upsert
   client.ev.on("messages.upsert", ({ messages, type }) => {
     if (type !== "notify") return;
+    const fs = require("fs");
+    fs.writeFileSync(
+      "./dump/message.json",
+      JSON.stringify({ messages, type }, null, 2)
+    );
     messageHandler(client, { messages, type });
   });
 }

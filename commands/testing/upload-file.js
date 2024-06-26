@@ -5,7 +5,7 @@ const { Tool } = require("@controllers/handler/tools");
  * @type { import('@libs/builders/command').ICommand }
  */
 module.exports = {
-  aliases: ["upload-file"],
+  aliases: ["upload-file-pdf"],
   callback: async ({ msg, client, fullArgs }) => {
     const file =
       (await msg.download("buffer")) ||
