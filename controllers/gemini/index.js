@@ -107,7 +107,7 @@ class Gemini {
     /**
      * @type { import("./gemini").GeminiFlash | import("./gemini").GeminiPro }
      */
-    const selectedModel = "gemini-1.5-flash";
+    const selectedModel = "gemini-1.5-pro";
 
     const model = gemini.getGenerativeModel({
       model: selectedModel,
