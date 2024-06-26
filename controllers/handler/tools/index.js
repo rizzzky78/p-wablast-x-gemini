@@ -29,6 +29,11 @@ class Tool {
    * @returns { Promise<{ ext: import("file-type/core").FileExtension; mime: import("file-type/core").MimeType }> }
    */
   static async getMimeTypeFromBuffer(buffer) {
+    if (!buffer)
+      return {
+        ext: "invalid",
+        mime: "invalid",
+      };
     return await fileType.fromBuffer(buffer);
   }
 }

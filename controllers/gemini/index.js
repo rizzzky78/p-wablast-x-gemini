@@ -8,6 +8,8 @@ const chalk = require("chalk");
 const { Dataset } = require("./dataset");
 const { Persona } = require("./persona");
 const logger = require("@libs/utils/logger");
+const { GoogleCloudAIFile } = require("./api/google");
+
 const {
   functionDeclarationTool,
   functionCallMapper,
@@ -133,13 +135,16 @@ class Gemini {
     }
 
     if (inlineData.img) {
+      const resultImg = await GoogleCloudAIFile.uploadFile(inlineData.img);
       const visionImage = await model.generateContent([
-        prompt,
         {
-          inlineData: {
-            data: inlineData.img.toString("base64"),
-            mimeType: "image/png",
+          fileData: {
+            mimeType: resultImg.file.mimeType,
+            fileUri: resultImg.file.uri,
           },
+        },
+        {
+          text: prompt,
         },
       ]);
       const visionResponseText = visionImage.response.text();
@@ -156,23 +161,26 @@ class Gemini {
     }
 
     if (inlineData.vid) {
-      const visionVideo = await model.generateContent([
-        prompt,
+      const resultVid = await GoogleCloudAIFile.uploadFile(inlineData.vid);
+      const visionVideoResponse = await model.generateContent([
         {
-          inlineData: {
-            data: inlineData.vid.toString("base64"),
-            mimeType: "video/mp4",
+          fileData: {
+            mimeType: resultVid.file.mimeType,
+            fileUri: resultVid.file.uri,
           },
         },
+        {
+          text: prompt,
+        },
       ]);
-      const visionResponseText = visionVideo.response.text();
+      const visionVideResponseText = visionVideoResponse.response.text();
       sessionChat.push(
-        ...Dataset.injectVisionResponse(prompt, visionResponseText)
+        ...Dataset.injectVisionResponse(prompt, visionVideResponseText)
       );
       existingUser
         ? await this.updateUserData({ id, content: sessionChat })
         : await this.createUser({ id, tagname, content: sessionChat });
-      return visionResponseText;
+      return visionVideResponseText;
     }
 
     const chat = model.startChat({
