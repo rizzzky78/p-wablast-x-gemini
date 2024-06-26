@@ -75,7 +75,7 @@ async function MessageHandler(client, { messages, type }) {
           prompt: messageArgs,
         },
         inlineData: {
-          img: mime === "image/png" ? mediaMessage : null,
+          img: mime === "image/jpeg" ? mediaMessage : null,
           vid: mime === "video/mp4" ? mediaMessage : null,
         },
       })
