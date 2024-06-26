@@ -133,16 +133,16 @@ class Gemini {
     }
 
     if (inlineData.img) {
-      const visionResponse = await model.generateContent([
+      const visionImage = await model.generateContent([
         prompt,
         {
           inlineData: {
-            data: img.toString("base64"),
+            data: inlineData.img.toString("base64"),
             mimeType: "image/png",
           },
         },
       ]);
-      const visionResponseText = visionResponse.response.text();
+      const visionResponseText = visionImage.response.text();
       sessionChat.push(
         ...Dataset.injectVisionResponse(prompt, visionResponseText)
       );
@@ -153,6 +153,26 @@ class Gemini {
     }
 
     if (inlineData.doc) {
+    }
+
+    if (inlineData.vid) {
+      const visionVideo = await model.generateContent([
+        prompt,
+        {
+          inlineData: {
+            data: inlineData.vid.toString("base64"),
+            mimeType: "video/mp4",
+          },
+        },
+      ]);
+      const visionResponseText = visionVideo.response.text();
+      sessionChat.push(
+        ...Dataset.injectVisionResponse(prompt, visionResponseText)
+      );
+      existingUser
+        ? await this.updateUserData({ id, content: sessionChat })
+        : await this.createUser({ id, tagname, content: sessionChat });
+      return visionResponseText;
     }
 
     const chat = model.startChat({

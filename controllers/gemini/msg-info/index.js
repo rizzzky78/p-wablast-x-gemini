@@ -10,6 +10,11 @@ const msg_object = {
   error_occured: `Oops, something went wrong! Please try again later, or contact Admin if the issue persists. Type *admin* to access Admin contacts.`,
 };
 
+/**
+ * 
+ * @param { string } response Gemini Response Text 
+ * @returns 
+ */
 function formatMessage(response) {
   return `${response}\n\n> Type *clear* to start new topic.`;
 }

@@ -62,15 +62,27 @@ async function MessageHandler(client, { messages, type }) {
         (await msg.download("buffer")) ||
         (msg.quoted && (await msg.quoted.download("buffer"))) ||
         null;
+      /**
+       *
+       * @param { import("@libs/utils/serialize").Serialize } mimeMsg
+       * @param { Buffer } mimeMedia
+       * @returns { { img: Buffer | null; vid: Buffer | null } }
+       */
+      function mapMediaMessage(mimeMsg, mimeMedia) {
+        if (mimeMsg.typeCheck.isImage || mimeMsg.typeCheck.isQuotedImage) {
+          return { img: mimeMedia, vid: null };
+        }
+        if (msg.typeCheck.isVideo || msg.typeCheck.isQuotedVideo) {
+          return { vid: mimeMedia, img: null };
+        }
+      }
       await Gemini.generative({
         user: {
           id: msg.senderNumber,
           tagname: msg.pushName,
           prompt: messageArgs,
         },
-        inlineData: {
-          img: mediaMessage,
-        },
+        inlineData: mapMediaMessage(msg, mediaMessage),
       })
         .then((geminiResponse) => {
           return client.sendMessage(msg.from, {
