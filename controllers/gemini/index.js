@@ -136,6 +136,9 @@ class Gemini {
 
     if (inlineData.img) {
       const resultImg = await GoogleCloudAIFile.uploadFile(inlineData.img);
+
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+
       const visionImage = await model.generateContent([
         {
           fileData: {
@@ -162,6 +165,9 @@ class Gemini {
 
     if (inlineData.vid) {
       const resultVid = await GoogleCloudAIFile.uploadFile(inlineData.vid);
+
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+
       const visionVideoResponse = await model.generateContent([
         {
           fileData: {
