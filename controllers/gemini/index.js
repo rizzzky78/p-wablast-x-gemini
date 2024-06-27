@@ -32,6 +32,14 @@ class Gemini {
 
   /**
    *
+   * @param { { id: string } } param0
+   */
+  static async resetUserChats({ id }) {
+    await user.findOneAndDelete({ id });
+  }
+
+  /**
+   *
    * @param { string } id
    */
   static async readUserData(id) {

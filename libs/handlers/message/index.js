@@ -87,9 +87,10 @@ async function MessageHandler(client, { messages, type }) {
               text: formatMessage(geminiResponse),
             });
           })
-          .catch((e) => {
+          .catch(async (e) => {
             console.error(e);
             logger.error(e);
+            await Gemini.resetUserChats({ id: msg.senderNumber });
             return msg.reply(quickMessage("error_occured"));
           });
       });
