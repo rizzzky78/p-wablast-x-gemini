@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/rizzzky78/rizzzkyRepo/main/picture/Chatbot%20HANI%20BC%20Cilacap%203.png" width="150" height="150" border="0" alt="PFP">
 
-## Chatbot HANI BC Cilacap 3 x Google Gemini AI
+## Chatbot Customer Service x Google Gemini AI
 
 _Lightweight, Customizable WhatsApp Bot_
 
@@ -12,20 +12,6 @@ _Lightweight, Customizable WhatsApp Bot_
 ## [![JavaScript](https://img.shields.io/badge/JavaScript-d6cc0f?style=for-the-badge&logo=javascript&logoColor=white)](https://www.javascript.com) [![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/) [![MongoDB](https://img.shields.io/badge/MongoDB-000000?style=for-the-badge&logo=MongoDB&logoColor=green)](https://www.mongodb.com)
 
 </div>
-
-## Library Used
-
-- @adiwajshing/baileys
-- @adiwajshing/keyed-db
-- @google/generative-ai
-- mongodb
-- axios
-- chalk
-- cron
-- crypto-random-string
-- jspdf
-- module-alias
-- winston
 
 ---
 
